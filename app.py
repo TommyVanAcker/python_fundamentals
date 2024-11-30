@@ -19,6 +19,8 @@ def menu():
       list_books()
     elif user_input == 'r':
       prompt_read_book()
+    elif user_input == 'd':
+      prompt_delete_book()
     user_input = input(USER_CHOICE)
 
 def prompt_add_book():
@@ -40,6 +42,7 @@ def prompt_read_book():
   database.mark_read(name)
 
 def prompt_delete_book():
-  pass
+  name = input('Enter the name of the book to remove from the database: ')
+  database.delete_book_better(name)
 
 menu()
