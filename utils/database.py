@@ -1,19 +1,24 @@
 """
 
-Concerned with storing and retrieving books from a list
+Concerned with storing and retrieving books from a csv file
 
+name,author,0\n
+name,author,0\n
 """
-books = []
+books_file = 'books.csv'
 
 def add_book(name, author):
-  books.append({
-    'name': name,
-    'author': author,
-    'read': False
-  })
+  with open(books_file, 'a') as file:
+    file.write(f'{name}, {author},0\n')
 
 def get_all_books():
-  return books
+  with open(books_file, 'r') as file:
+    lines = [line.strip().split(',') for line in file.readlines()] #[['name','author','0'],[name,author,0]]
+  return [
+    {
+      'name': line[0], 'author': line[1], 'read': line[2]
+    } for line in lines
+  ]
 
 def mark_read(title):
   for book in books:
@@ -23,7 +28,7 @@ def mark_read(title):
 
 #best practise to remove a book from a list is creating a new list with list comprehension
 def delete_book_better(title):
-  global books #tell python that books is not local otherwise python will create a local variabel that only exist here.
+  
   books = [book for book in books if book['name'] != title]
 
 #not a good practise to do the following (removing from a list while iterating over it)
