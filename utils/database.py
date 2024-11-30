@@ -21,19 +21,22 @@ def get_all_books():
   ]
 
 def mark_read(title):
+  books = get_all_books()
   for book in books:
     name = book['name']
     if name == title:
-      book['read'] = True
+      book['read'] = '1'
+      _save_all_books(books)
+  
+def _save_all_books(books):
+  with open(books_file, 'w') as file:
+    for book in books:
+      file.write(f"{book['name']},{book['author']},{book['read']}\n")
 
 #best practise to remove a book from a list is creating a new list with list comprehension
 def delete_book_better(title):
-  
+  books = get_all_books() 
   books = [book for book in books if book['name'] != title]
+  _save_all_books()
 
-#not a good practise to do the following (removing from a list while iterating over it)
-def delete_book(title):
-  for book in books:
-    name = book['name']
-    if name == title:
-      books.remove(book)
+

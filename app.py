@@ -34,7 +34,7 @@ def list_books():
   for book in books:
     title = book['name']
     author = book['author']
-    read = 'yes'if book['read'] else 'no'
+    read = 'yes'if book['read'] == '1' else 'no'
     print(f'{title} written by {author} has been read: {read}')
 
 def prompt_read_book():
