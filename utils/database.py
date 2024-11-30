@@ -14,3 +14,9 @@ def add_book(name, author):
 
 def get_all_books():
   return books
+
+def mark_read(title):
+  for book in books:
+    name = book['name']
+    if name == title:
+      book['read'] = True

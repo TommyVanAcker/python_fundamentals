@@ -17,6 +17,8 @@ def menu():
       prompt_add_book()
     elif user_input == 'l':
       list_books()
+    elif user_input == 'r':
+      prompt_read_book()
     user_input = input(USER_CHOICE)
 
 def prompt_add_book():
@@ -34,7 +36,8 @@ def list_books():
     print(f'{title} written by {author} has been read: {read}')
 
 def prompt_read_book():
-  pass
+  name = input('What is the title of the book: ')
+  database.mark_read(name)
 
 def prompt_delete_book():
   pass
